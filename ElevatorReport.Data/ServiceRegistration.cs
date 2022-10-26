@@ -1,11 +1,7 @@
 ﻿using ElevatorReport.Data.Contexts;
+using ElevatorReport.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElevatorReport.Data
 {
@@ -14,6 +10,8 @@ namespace ElevatorReport.Data
         public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
+            services.AddTransient<UserService>();
+            services.AddTransient<AccountService>();
             
         }
     }

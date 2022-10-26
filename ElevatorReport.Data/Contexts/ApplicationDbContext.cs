@@ -13,16 +13,18 @@ namespace ElevatorReport.Data.Contexts
         {
             base.OnModelCreating(builder);
 
+            const string identityTablesPrefix = "App";
+
             foreach (var entityType in builder.Model.GetEntityTypes())
             {
                 var tableName = entityType.GetTableName();
                 if (tableName.StartsWith("AspNet"))
                 {
-                    entityType.SetTableName(tableName.Substring(6));
+                    entityType.SetTableName($"{identityTablesPrefix}" + tableName.Substring(6));
                 }
             }
         }
 
-        //public DbSet<AppUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
